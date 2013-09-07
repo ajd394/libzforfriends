@@ -3,22 +3,38 @@
 <title>Libz With Friends</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
-//<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
-//<script type='text/javascript'  src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+<script type='text/javascript'  src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
-<script src='https://cdn.firebase.com/v0/firebase.js'></script>
 <script type = "text/javascript">
+
 function register() {
 	var user = document.getElementById("username").value;
 	var pass1 = document.getElementById("password1").value;
 	var pass2 = document.getElementById("password2").value;
 	//document.writeln(user + " " + pass1 + " " + pass2 + " " + (pass1 != pass2));
 	if (pass1 == pass2){
-		var myDataRef = new Firebase('https:///libzwithfriends.firebaseio-demo.com/');
-		myDataRef.set({category : 'Username'});
-		
-		
+    		var chatRef = new Firebase('https://libzwithfriends.firebaseio.com/');
+    var auth = new FirebaseSimpleLogin(chatRef, function(error, user) {
+      if (error) {
+        // an error occurred while attempting login
+        console.log(error);
+      } else if (user) {
+        // user authenticated with Firebase
+        console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+      } else {
+        // user is logged out
+      }
+    });
+	
+	auth.createUser(user, pass1, function(error, user) {
+    if (!error) {
+        console.log('User Id: ' + user.id + ', Email: ' + user.email);
+      }
+    });
+
+    }   
 		/*var client = new Dropbox.Client({key: 'islse17hkoseu69'});
 
 client.authenticate();
@@ -65,7 +81,7 @@ var results = taskTable.query();
 		var newUser = refBase.child('users').push(username : user);
 		newUser.push({user: count, password : pass1, friendIDs : '', active : '', archived : '', friendRequests : '', gameRequests : ''});
 		window.location = "index.html";*/
-	}
+	
 }
 </script>
 </head>
