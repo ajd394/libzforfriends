@@ -31,7 +31,6 @@
             } else if (user) {
               // user authenticated with Firebase
               console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
-              //setCookie("libz",user.id,1);
               window.location = "mainpage.html?id=" + user.id;
             } else {
               // user is logged out
@@ -43,19 +42,7 @@
                     email: document.getElementById("username").value,
                     password: document.getElementById("password1").value
                   });
-              
-
           }
-
-          function setCookie(c_name,value,exdays){
-            var exdate=new Date();
-            console.log(value);
-            exdate.setDate(exdate.getDate() + exdays);
-            var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-            document.cookie=c_name + "=" + c_value;
-
-          }
-
 
           </script>
 
