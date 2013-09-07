@@ -1,0 +1,115 @@
+<!-- Home -->
+<html>
+<head>
+<title>Libz With Friends</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+<script type='text/javascript'  src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <a data-role="button" href="addfriend.html" class="ui-btn-right">
+            +
+        </a>
+        <h3>
+            Libz with Friends
+        </h3>
+    </div>
+    <div data-role="content">
+        <a data-role="button" href="choosefriends.html">
+            New Game
+        </a>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-role="list-divider" role="heading">
+                Waiting for You
+            </li>
+            <li data-theme="c">
+                <a href="selectiongame.html" data-transition="slide">
+                    Game 1
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="selectiongame.html" data-transition="slide">
+                    Game 2
+                </a>
+            </li>
+        </ul>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-role="list-divider" role="heading">
+                Waiting for Others
+            </li>
+            <li data-theme="c">
+                <a href="optiongame.html" data-transition="slide">
+                    Game 3
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="optiongame.html" data-transition="slide">
+                    Game 4
+                </a>
+            </li>
+        </ul>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-role="list-divider" role="heading">
+                Requests
+            </li>
+            <li data-theme="c">
+                <a href="selectiongame.html" data-transition="slide">
+                    Game 5
+                </a>
+            </li>
+        </ul>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-role="list-divider" role="heading">
+                Archived Games
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Game 0
+                </a>
+            </li>
+        </ul>
+        <h4>
+            Friend Requests
+        </h4>
+        <h5>
+            Friend 1
+        </h5>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a data-role="button" href="#page1">
+                    Accept
+                </a>
+            </div>
+            <div class="ui-block-b">
+                <a data-role="button" href="#page1">
+                    Reject
+                </a>
+            </div>
+        </div>
+        <h4>
+            Game Requests
+        </h4>
+        <h5>
+            Game 9
+        </h5>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a data-role="button" href="#page1">
+                    Accept
+                </a>
+            </div>
+            <div class="ui-block-b">
+                <a data-role="button" href="#page1">
+                    Reject
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
