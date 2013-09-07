@@ -3,6 +3,8 @@
 <title>Libz With Friends</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+<script type='text/javascript'  src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
 </head>
@@ -15,6 +17,7 @@
     </div>
     <div data-role="content">
         <form action="">
+
             <div data-role="fieldcontain">
                 <label for="textinput1">
                     Username
@@ -27,11 +30,26 @@
                 </label>
                 <input name="" id="textinput2" placeholder="" value="" type="password">
             </div>
-            <input type="submit" value="Submit">
+            <script type="text/javascript"> 
+                var ref = new Firebase('https://libzwithfriends.firebaseio.com');
+                var auth = new FirebaseSimpleLogin(ref, function(error, user) {
+                  if (error) {
+                    // an error occurred while attempting login
+                    console.log(error);
+                  } else if (user) {
+                    // user authenticated with Firebase
+                    console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+                  } else {
+                    // user is logged out
+                  }
+                });
+            </script>
+            <input type="submit" value="Submit" onclick="javascript:auth.login('Facebook')">
             <a data-role="button" href="#page1">
                 Register
             </a>
         </form>
+
     </div>
 </div>
 </body>
