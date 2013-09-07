@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.pennapps.libzwithfriends"
+        version   = "1.0.0">
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>Libz with Friends</name>
+
+    <description>
+        Play libz with friends
+    </description>
+
+    <gap:plugin name="org.apache.cordova.facebook.Connect" />
+
+</widget>
