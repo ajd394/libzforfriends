@@ -9,7 +9,50 @@
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
 </head>
-<body bgcolor="#8790A1">
+<body bgcolor="#8790A1" onload= "drawButtons()">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+<script type= 'text/javascript'>
+var gameList = "10 11 12 13 14 15 16 17 18";
+var host = "1 0 1 1 1 0 0 1 1";
+var completed = "0 0 1 0 0 1 1 0 0";
+var seen = "0 0 1 1 0 0 1 0 1";
+
+function drawButtons() {
+	var gameIDList = gameList.split(" ");
+	var hostList = host.split(" ");
+	var completedList = completed.split(" ");
+	var seenGameList = seen.split(" ");
+	for(var i = 0; i < gameIDList.length; i++) {
+	
+		if(hostList[i] == "1" && completedList[i] == "0") {
+			var newHTML = "<li data-theme='c'><a href='selectiongame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
+			var element = document.getElementById("returnedhostgame");
+			element.innerHTML = element.innerHTML + newHTML;	
+		}
+		console.log(gameIDList.length + " " + i);
+		if(hostList[i] == "0" && completedList[i] == "0") {
+			var newHTML = "<li data-theme='c'><a href='optiongame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
+			var element = document.getElementById("playablegames");
+			element.innerHTML = element.innerHTML + newHTML;
+		}
+		if(hostList[i] == "1" && completedList[i] == "1") {
+			var newHTML = "<li data-theme='c'><a href='archivegame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
+			var element = document.getElementById("archivedgames");
+			element.innerHTML = element.innerHTML + newHTML;
+		}
+		if(completedList[i] == "1" && hostList[i] == "0" && seenGameList[i] == "1") {
+			var newHTML = "<li data-theme='c'><a href='archivegame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
+			var element = document.getElementById("archivedgames");
+			element.innerHTML = element.innerHTML + newHTML;
+		}
+		if(completedList[i] == "1" && hostList[i] == "0" && seenGameList[i] == "0") {
+			var newHTML = "<li data-theme='c'><a href='archivegame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
+			var element = document.getElementById("returntopartgames");
+			element.innerHTML = element.innerHTML + newHTML;
+		}
+	}
+}
+</script>
 <div data-role="page" id="page1">
     <div data-theme="c" data-role="header">
         <a data-role="button" href="addfriend.html" class="ui-btn-right">
@@ -27,7 +70,9 @@
             <li data-role="list-divider" role="heading">
                 Playable Games
             </li>
-            <li data-theme="c">
+            <div id= "playablegames"></div>
+            
+            <!---<li data-theme="c">
                 <a href="selectiongame.html" data-transition="slide">
                     Game 1
                 </a>
@@ -36,13 +81,14 @@
                 <a href="selectiongame.html" data-transition="slide">
                     Game 2
                 </a>
-            </li>
+            </li>-->
         </ul>
         <ul data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-role="list-divider" role="heading">
                 Returned-to-Host
             </li>
-            <li data-theme="c">
+            <div id= "returnedhostgame"></div>
+            <!--<li data-theme="c">
                 <a href="optiongame.html" data-transition="slide">
                     Game 3
                 </a>
@@ -51,27 +97,29 @@
                 <a href="optiongame.html" data-transition="slide">
                     Game 4
                 </a>
-            </li>
+            </li>-->
         </ul>
         <ul data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-role="list-divider" role="heading">
                 Returned-to-Participant
             </li>
-            <li data-theme="c">
+            <div id= "returntopartgames"></div>
+            <!--<li data-theme="c">
                 <a href="selectiongame.html" data-transition="slide">
                     Game 5
                 </a>
-            </li>
+            </li>-->
         </ul>
         <ul data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-role="list-divider" role="heading">
                 Archived Games
             </li>
-            <li data-theme="c">
+            <div id="archivedgames"></div>
+            <!--<li data-theme="c">
                 <a href="#page1" data-transition="slide">
                     Game 0
                 </a>
-            </li>
+            </li>-->
         </ul>
     </div>
 </div>
