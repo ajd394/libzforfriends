@@ -13,6 +13,8 @@ function register() {
 	var user = document.getElementById("username").value;
 	var pass1 = document.getElementById("password1").value;
 	var pass2 = document.getElementById("password2").value;
+	var userID = 0;
+	var userEmail = '';
 	//document.writeln(user + " " + pass1 + " " + pass2 + " " + (pass1 != pass2));
 	if (pass1 == pass2){
     		var chatRef = new Firebase('https://libzwithfriends.firebaseio.com/');
@@ -31,20 +33,16 @@ function register() {
 	auth.createUser(user, pass1, function(error, user) {
     if (!error) {
         console.log('User Id: ' + user.id + ', Email: ' + user.email);
+        userID = user.id;
+        userEmail = user.email;
       }
     });
 
     }
-		
-		/*dataSnapshot.forEach(function(childSnapshot) {
-  			count = count + 1;
-		});*/
-		
-
-		/*
-		var newUser = refBase.child('users').push(username : user);
-		newUser.push({user: count, password : pass1, friendIDs : '', active : '', archived : '', friendRequests : '', gameRequests : ''});*/
-		window.location = "index.html";
+    	//document.write(userID);
+		var userRef = chatRef.child('users');
+		/*userRef.set();*/
+		//window.location = "index.html";
 	
 }
 </script>
