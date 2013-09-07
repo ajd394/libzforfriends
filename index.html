@@ -17,17 +17,22 @@
             LIBZ WITH FRIENDS
         </h3>
     </div>
+    <div id="AAHH"style="visibility:hidden; color:RED; align:center ">Invalid Login</div>
     <div data-role="content">
         <form action="">
           <script type="text/javascript">
+          var userNum;
           var chatRef = new Firebase('https://libzwithfriends.firebaseio.com/');
           var auth = new FirebaseSimpleLogin(chatRef, function(error, user) {
             if (error) {
               // an error occurred while attempting login
+              document.getElementById("AAHH").style.visibility="visible";
               console.log(error);
             } else if (user) {
               // user authenticated with Firebase
               console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+              //setCookie("libz",user.id,1);
+              window.location = "mainpage.html?id=" + user.id;
             } else {
               // user is logged out
             }
@@ -38,7 +43,19 @@
                     email: document.getElementById("username").value,
                     password: document.getElementById("password1").value
                   });
+              
+
           }
+
+          function setCookie(c_name,value,exdays){
+            var exdate=new Date();
+            console.log(value);
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+            document.cookie=c_name + "=" + c_value;
+
+          }
+
 
           </script>
 
@@ -56,7 +73,7 @@
                 <input name="" id="password1" placeholder="" value="" type="password">
             </div>
             
-            <input type="submit" value="Submit" onclick="javascript:login()">
+            <input type="button" value="Submit" onclick="javascript:login()">
             <a data-role="button" href="registration.html"> Register</a>
         </form>
 
