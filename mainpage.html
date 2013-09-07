@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
 <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
-<script type='text/javascript'  src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
 </head>
+
 <body bgcolor="#8790A1" onload= "drawButtons()">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
 <script type= 'text/javascript'>
 var gameList = "10 11 12 13 14 15 16 17 18";
 var host = "1 0 1 1 1 0 0 1 1";
@@ -26,31 +26,44 @@ function drawButtons() {
 	
 		if(hostList[i] == "1" && completedList[i] == "0") {
 			var newHTML = "<li data-theme='c'><a href='selectiongame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
-			var element = document.getElementById("returnedhostgame");
-			element.innerHTML = element.innerHTML + newHTML;	
+			//var element = document.getElementById("returnedhostgame");
+			//element.innerHTML = element.innerHTML + newHTML;
+			$("#trigger1").append(newHTML).listview('refresh');
 		}
-		console.log(gameIDList.length + " " + i);
 		if(hostList[i] == "0" && completedList[i] == "0") {
 			var newHTML = "<li data-theme='c'><a href='optiongame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
-			var element = document.getElementById("playablegames");
-			element.innerHTML = element.innerHTML + newHTML;
+			//var element = document.getElementById("playablegames");
+			//element.innerHTML = element.innerHTML + newHTML;
+			$("#trigger2").append(newHTML).listview('refresh');
 		}
 		if(hostList[i] == "1" && completedList[i] == "1") {
 			var newHTML = "<li data-theme='c'><a href='archivegame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
-			var element = document.getElementById("archivedgames");
-			element.innerHTML = element.innerHTML + newHTML;
+			//var element = document.getElementById("archivedgames");
+			//element.innerHTML = element.innerHTML + newHTML;
+			$("#trigger4").append(newHTML).listview('refresh');
 		}
 		if(completedList[i] == "1" && hostList[i] == "0" && seenGameList[i] == "1") {
 			var newHTML = "<li data-theme='c'><a href='archivegame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
-			var element = document.getElementById("archivedgames");
-			element.innerHTML = element.innerHTML + newHTML;
+			//var element = document.getElementById("archivedgames");
+			//element.innerHTML = element.innerHTML + newHTML;
+			$("#trigger4").append(newHTML).listview('refresh');
 		}
 		if(completedList[i] == "1" && hostList[i] == "0" && seenGameList[i] == "0") {
 			var newHTML = "<li data-theme='c'><a href='archivegame.html' data-transition='slide'>Game " + gameIDList[i] + " </a></li>";
-			var element = document.getElementById("returntopartgames");
-			element.innerHTML = element.innerHTML + newHTML;
+			//var element = document.getElementById("returntopartgames");
+			//element.innerHTML = element.innerHTML + newHTML;
+			$("#trigger3").append(newHTML).listview('refresh');
 		}
 	}
+	$("#trigger1").trigger("create");
+	$("#trigger2").trigger("create");
+	$("#trigger3").trigger("create");
+	$("#trigger4").trigger("create");
+	$("#trigger1").listview('refresh');
+	$("#trigger2").refresh();
+	$("#trigger3").refresh();
+	$("#trigger4").refresh();
+
 }
 </script>
 <div data-role="page" id="page1">
@@ -66,7 +79,7 @@ function drawButtons() {
         <a data-role="button" href="choosefriends.html">
             New Game
         </a>
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true" id ="trigger1">
             <li data-role="list-divider" role="heading">
                 Playable Games
             </li>
@@ -83,7 +96,7 @@ function drawButtons() {
                 </a>
             </li>-->
         </ul>
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true" id ="trigger2">
             <li data-role="list-divider" role="heading">
                 Returned-to-Host
             </li>
@@ -99,7 +112,7 @@ function drawButtons() {
                 </a>
             </li>-->
         </ul>
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true" id ="trigger3">
             <li data-role="list-divider" role="heading">
                 Returned-to-Participant
             </li>
@@ -110,7 +123,7 @@ function drawButtons() {
                 </a>
             </li>-->
         </ul>
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true" id ="trigger4">
             <li data-role="list-divider" role="heading">
                 Archived Games
             </li>
@@ -123,8 +136,5 @@ function drawButtons() {
         </ul>
     </div>
 </div>
-<div>Libz with Friends 1.0.0
-		&c;2013 Sheyn Denizov, Andrew DiPrinzio, Zachary Daniels
-	</div>
 </body>
 </html>
