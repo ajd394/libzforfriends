@@ -1,0 +1,24 @@
+{
+  "puzzles" : {
+    "1" : {
+      "title" : "The journey",
+      "text" : "I <active verb> to <friends name>s <adjective> <location>",
+      "choices" : "<active verb> <friends name> <adjective> <location>"
+    },
+    "2" : {
+      "title" : "The plants",
+      "text" : "<friends name>s green <noun> grew <adverb> in the shining <noun>",
+      "choices" : "<friends name> <noun> <adverb> <location>"
+    },
+    "3" : {
+      "title" : "Flying",
+      "text" : "Above the clouds, a big <animal> soared <adverb> towards the <adjective> <noun>",
+      "choices" : "<animal> <adverb> <adjective> <noun>"
+    },
+    "4" : {
+      "title" : "Another day",
+      "text" : "When I woke up, I took a <noun> and <adverb> shaved my <body part>  to get ready for my job interview at <employer>",
+      "choices" : "<noun> <adverb> <body part> <employer>"
+    }
+  }
+}
