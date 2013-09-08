@@ -31,7 +31,9 @@
             } else if (user) {
               // user authenticated with Firebase
               console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
-              window.location = "mainpage.html?id=" + user.id;
+
+              $.mobile.changePage("mainpage.html?id=" + user.id)
+              //window.location = "mainpage.html?id=" + user.id;
             } else {
               // user is logged out
             }
