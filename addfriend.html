@@ -9,6 +9,28 @@
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
 </head>
 <body>
+<script type='text/javascript'>
+    function addUser(friend_id){
+        var str = document.URL.split( '=' );
+        var id= str[1];
+        var nameRef = new Firebase('https://libzwithfriends.firebaseio.com/users/'+id);
+        nameRef.child('friends').push(friend_id);
+    };
+
+    function findUserId(){
+        var userListRef = new Firebase('https://libzwithfriends.firebaseio.com/users/');
+        userListRef.once('value', function(allUsersSnapshot) {
+          allUsersSnapshot.forEach(function(UserSnapshot) {
+            // Will be called with a UserSnapshot for each User under User_list.
+            if(UserSnapshot.child('email').val()===document.getElementById('textinput1').value){
+                addUser(UserSnapshot.name()); 
+            }
+          });
+        });
+    }
+ 
+</script>
+
 <div data-role="page" id="page1">
     <div data-theme="c" data-role="header">
     	<a data-role="button" href="mainpage.html" class="ui-btn-left">
@@ -26,7 +48,7 @@
                 </label>
                 <input name="" id="textinput1" placeholder="" value="" type="text">
             </div>
-            <input type="submit" value="Add">
+            <input type="button" value="Add" onclick="javascript:findUserId()">
         </form>
     </div>
 </div>
