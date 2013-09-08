@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>Libz With Friends</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+<script type='text/javascript'  src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+<script type = "text/javascript">
+function register() {
+	var user = document.getElementById("username").value;
+	var pass1 = document.getElementById("password1").value;
+	var pass2 = document.getElementById("password2").value;
+	//document.writeln(user + " " + pass1 + " " + pass2 + " " + (pass1 != pass2));
+    var chatRef = new Firebase('https://libzwithfriends.firebaseio.com/');
+    
+	if (pass1 == pass2){
+        var auth = new FirebaseSimpleLogin(chatRef, function(error, user) {
+          if (error) {
+            // an error occurred while attempting login
+            console.log(error);
+          } else if (user) {
+            // user authenticated with Firebase
+            console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+          } else {
+            // user is logged out
+          }
+        });
+
+	auth.createUser(user, pass1, function(error, user) {
+    if (!error) {
+        console.log('User Id: ' + user.id + ', Email: ' + user.email);
+        var userRef = new Firebase('https://libzwithfriends.firebaseio.com/users/');
+        userRef.child(user.id).set({email: user.email, friends: ' ', playable: ' ', archived:' '});
+      }
+    });
+
+    }
+    
+
+    //userRef.set({email: 'ajd@gmail.com', friends: '1,2,3,4', playable: ' ', archived:' '});
+
+
+	//window.location = "index.html";
+
+}
+</script>
+</head>
+<body>
+<div data-role="page" id="page1">
+    <div data-theme="c" data-role="header">
+    	<a data-role="button" href="index.html" class="ui-btn-left">
+            Back
+        </a>
+        <h3>
+            REGISTER
+        </h3>
+    </div>
+    <div data-role="content">
+        <form action="">
+
+            <div data-role="fieldcontain">
+                <label for="textinput1">
+                    E-Mail:
+                </label>
+                <input name="" id="username" placeholder="user@domain.com" value="" type="text">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="textinput2">
+                    Password:
+                </label>
+                <input name="" id="password1" placeholder="" value="" type="password">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="textinput2">
+                    Verify Password:
+                </label>
+                <input name="" id="password2" placeholder="" value="" type="password">
+            </div>
+            <input type="button" value="Submit" onclick="register()">
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

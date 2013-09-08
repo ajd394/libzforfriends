@@ -7,6 +7,9 @@
 <script type='text/javascript'  src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+<script>
+    var count = 0;
+</script>
 </head>
 <body>
 <div data-role="page" id="page1">
@@ -14,12 +17,36 @@
         <h3>
             INVITE OTHERS
         </h3>
-        <a data-role="button" href="#page1" class="ui-btn-left">
-            Button
-        </a>
     </div>
     <div data-role="content">
+    <script type="text/javascript">
+    var puzzleListRef = new Firebase('https://libzwithfriends.firebaseio.com/puzzles/');
+        puzzleListRef.once('value', function(allPuzzlesSnapshot) {
+          allPuzzlesSnapshot.forEach(function(PuzzleSnapshot) {
+          	var title = PuzzleSnapshot.child('title').val();
+          	var num = PuzzleSnapshot.name();
+          	var text = PuzzleSnapshot.child('text').val();
+          	title = title.replace("<","&lt;");
+          	title = title.replace(">","&gt;");
+          	text = text.replace("<","&lt;");
+          	text = text.replace(">","&gt;");
+          	var newHTML = "<center><h4>Puzzle #" + num + ": " + title + "</h4>" + "<h5>" + text + "</h5></center><br /><hr /><br />";
+          	var element = document.getElementById("libContent");
+			element.innerHTML = element.innerHTML + newHTML;
+            count = count + 1;
+            var newHTML = "<select id='selectmenu" + num +"' name=''><option value='" + num +"'>Option " + num +" </option></select>";
+			$("#choices").append(newHTML);			
+          });
+        });
+	</script>
+	<div id = "libContent"></div>
         <form action="">
+        <div data-role="fieldcontain">
+            <label for="selectmenu1" id = "choices">
+                Select a Lib:
+            </label>
+            <div id = "choices"></div>
+        </div>
         <div id="checkboxes3" data-role="fieldcontain">
             <fieldset data-role="controlgroup" data-type="vertical">
                 <legend>
