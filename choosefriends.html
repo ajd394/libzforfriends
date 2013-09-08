@@ -11,35 +11,56 @@
 <body>
 <div data-role="page" id="page1">
     <div data-theme="c" data-role="header">
-    <a data-role="button" href="mainpage.html" class="ui-btn-left">
-            Back
-        </a>
         <h3>
             INVITE OTHERS
         </h3>
+        <a data-role="button" href="#page1" class="ui-btn-left">
+            Button
+        </a>
     </div>
     <div data-role="content">
         <form action="">
-            <div id="checkboxes1" data-role="fieldcontain">
-                <fieldset data-role="controlgroup" data-type="vertical">
-                    <legend>
-                        Select Friends:
-                    </legend>
-                    <input id="checkbox1" name="" type="checkbox">
-                    <label for="checkbox1">
-                        Friend 1
-                    </label>
-                    <input id="checkbox2" name="" type="checkbox">
-                    <label for="checkbox2">
-                        Friend 2
-                    </label>
-                    <input id="checkbox3" name="" type="checkbox">
-                    <label for="checkbox3">
-                        Friend 3
-                    </label>
-                </fieldset>
+            <div data-role="fieldcontain">
+                <label for="textarea3">
+                    Pick a Libz:
+                </label>
+                <textarea name="" id="textarea3" placeholder=""></textarea>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a data-role="button" href="#page1">
+                        Previous
+                    </a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-role="button" href="#page1">
+                        Next
+                    </a>
+                </div>
             </div>
         </form>
+        <div id="checkboxes3" data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
+                <legend>
+                    Select Friend(s):
+                </legend>
+                <input id="checkbox5" name="" type="checkbox">
+                <label for="checkbox5">
+                    Friend 1
+                </label>
+                <input id="checkbox6" name="" type="checkbox">
+                <label for="checkbox6">
+                    Friend 2
+                </label>
+                <input id="checkbox7" name="" type="checkbox">
+                <label for="checkbox7">
+                    Friend 3
+                </label>
+            </fieldset>
+        </div>
+        <a data-role="button" href="#page1">
+            Submit
+        </a>
     </div>
 </div>
 </body>
