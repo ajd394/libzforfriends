@@ -7,8 +7,35 @@
 <script type='text/javascript'  src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
-<script>
-    var count = 0;
+<script type="text/javascript">
+	var count = 0;
+	var str = document.URL.split( '=' );
+    var id= str[1];
+    var friendsListRef = new Firebase('https://libzwithfriends.firebaseio.com/users/' + id + '/friends');
+        friendsListRef.once('value', function(allFriendsSnapshot) {
+          allFriendsSnapshot.forEach(function(FriendsSnapshot) {
+          	var val = FriendsSnapshot.val();
+          	console.log(val);
+          	addToList(val,count);
+          	count = count + 1;
+            //var newHTML = "<input id='checkbox'" + count + " name='' type='checkbox'><label for='checkbox'" + count + "></label>";
+			//$("#selectmenuChoices").append(newHTML);
+			//$("#selectmenuChoices").trigger('create');
+          });
+        });
+function addToList(id,count){
+	var userListRef = new Firebase('https://libzwithfriends.firebaseio.com/users/');
+        userListRef.once('value', function(allUsersSnapshot) {
+          allUsersSnapshot.forEach(function(UserSnapshot) {
+            // Will be called with a UserSnapshot for each User under User_list.
+            if(UserSnapshot.name()==id){
+                var newHTML2 = "<input id='checkbox" + count + "' name='' type='checkbox'><label for='checkbox" + count + "'>" + UserSnapshot.child('email').val() + "</label><br />";
+                $("#friends").append(newHTML2);
+                $("#friends").trigger('create');
+            }
+          });
+        });
+}
 </script>
 </head>
 <body>
@@ -20,6 +47,7 @@
     </div>
     <div data-role="content">
     <script type="text/javascript">
+    var count = 0;
     var puzzleListRef = new Firebase('https://libzwithfriends.firebaseio.com/puzzles/');
         puzzleListRef.once('value', function(allPuzzlesSnapshot) {
           allPuzzlesSnapshot.forEach(function(PuzzleSnapshot) {
@@ -34,8 +62,9 @@
           	var element = document.getElementById("libContent");
 			element.innerHTML = element.innerHTML + newHTML;
             count = count + 1;
-            var newHTML = "<select id='selectmenu" + num +"' name=''><option value='" + num +"'>Option " + num +" </option></select>";
-			$("#choices").append(newHTML);			
+            var newHTML = "<option value='" + num +"'>Option " + num +" </option>";
+			$("#selectmenuChoices").append(newHTML);
+			$("#selectmenuChoices").trigger('create');
           });
         });
 	</script>
@@ -45,29 +74,18 @@
             <label for="selectmenu1" id = "choices">
                 Select a Lib:
             </label>
-            <div id = "choices"></div>
+            <select id='selectmenuChoices' name=''>
+            </select>
         </div>
         <div id="checkboxes3" data-role="fieldcontain">
-            <fieldset data-role="controlgroup" data-type="vertical">
+            <fieldset data-role="controlgroup" data-type="vertical" id="friends">
                 <legend>
                     Select Friend(s):
                 </legend>
-                <input id="checkbox5" name="" type="checkbox">
-                <label for="checkbox5">
-                    Friend 1
-                </label>
-                <input id="checkbox6" name="" type="checkbox">
-                <label for="checkbox6">
-                    Friend 2
-                </label>
-                <input id="checkbox7" name="" type="checkbox">
-                <label for="checkbox7">
-                    Friend 3
-                </label>
             </fieldset>
         </div>
-        <a data-role="button" href="#page1">
-            Submit
+        <a data-role="button" href="" onclick="javascript:submitGame();">
+            Select
         </a>
 	</form>
     </div>
